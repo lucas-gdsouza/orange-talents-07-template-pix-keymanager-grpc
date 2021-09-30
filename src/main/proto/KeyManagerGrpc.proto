@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zup.pix";
+option java_outer_classname = "KeyManagerGrpc";
+
+package br.com.zupedu;
+
+service KeyManagerRegistraGrpcService {
+  rpc registra (RegistraChavePixRequest) returns (RegistraChavePixResponse) {}
+}
+
+enum TipoDeChave {
+  CHAVE_DESCONHECIDA = 0;
+  DOCUMENTO_CPF = 1;
+  TELEFONE_CELULAR = 2;
+  EMAIL = 3;
+  CHAVE_ALEATORIA = 4;
+}
+
+enum TipoDeConta {
+  CONTA_DESCONHECIDA = 0;
+  CONTA_CORRENTE = 1;
+  CONTA_POUPANCA = 2;
+}
+
+/**
+  * Registro de Chave
+ */
+
+message RegistraChavePixRequest {
+  string identificadorDoCliente = 1;
+  TipoDeConta tipoDeConta = 2;
+  TipoDeChave tipoDeChave = 3;
+  string chave = 4;
+}
+
+message RegistraChavePixResponse {
+  string identificadorDoCliente = 1;
+  string identificadorPix = 2;
+}
