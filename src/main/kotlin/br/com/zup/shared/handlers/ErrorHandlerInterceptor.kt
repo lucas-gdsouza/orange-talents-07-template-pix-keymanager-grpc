@@ -1,6 +1,7 @@
 package br.com.zup.shared.handlers
 
 import br.com.zup.shared.exceptions.ChavePixExistenteException
+import br.com.zup.shared.exceptions.ChavePixNaoEncontradaException
 import br.com.zup.shared.exceptions.ClienteNaoExistenteException
 import io.grpc.Status
 import io.grpc.stub.StreamObserver
@@ -42,6 +43,7 @@ class ErrorHandlerInterceptor() : MethodInterceptor<Any, Any> {
             is ConstraintViolationException -> status(Status.INVALID_ARGUMENT, ex)
             is PersistenceException -> status(Status.INVALID_ARGUMENT, ex)
             is ChavePixExistenteException -> status(Status.ALREADY_EXISTS, ex)
+            is ChavePixNaoEncontradaException -> status(Status.NOT_FOUND, ex)
             is ClienteNaoExistenteException -> status(Status.FAILED_PRECONDITION, ex)
 
             else -> Status.UNKNOWN.withCause(ex).withDescription("ERRO_INTERNO")

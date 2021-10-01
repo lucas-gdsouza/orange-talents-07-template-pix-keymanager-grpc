@@ -10,6 +10,10 @@ service KeyManagerRegistraGrpcService {
   rpc registra (RegistraChavePixRequest) returns (RegistraChavePixResponse) {}
 }
 
+service KeyManagerRemoveGrpcService {
+  rpc remove (RemoveChavePixRequest) returns (RemoveChavePixResponse) {}
+}
+
 enum TipoDeChave {
   CHAVE_DESCONHECIDA = 0;
   DOCUMENTO_CPF = 1;
@@ -36,6 +40,20 @@ message RegistraChavePixRequest {
 }
 
 message RegistraChavePixResponse {
+  string identificadorDoCliente = 1;
+  string identificadorPix = 2;
+}
+
+/**
+  * Remocao de Chave
+ */
+
+message RemoveChavePixRequest {
+  string identificadorDoCliente = 1;
+  string identificadorPix = 2;
+}
+
+message RemoveChavePixResponse {
   string identificadorDoCliente = 1;
   string identificadorPix = 2;
 }
