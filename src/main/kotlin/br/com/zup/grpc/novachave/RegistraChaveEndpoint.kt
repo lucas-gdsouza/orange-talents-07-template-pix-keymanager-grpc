@@ -1,11 +1,13 @@
 package br.com.zup.grpc.novachave
 
 import br.com.zup.pix.*
+import br.com.zup.shared.handlers.ErrorHandler
 import io.grpc.stub.StreamObserver
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
 
 @Singleton
+@ErrorHandler
 class RegistraChaveEndpoint(@Inject private val service: NovaChavePixService) :
     KeyManagerRegistraGrpcServiceGrpc.KeyManagerRegistraGrpcServiceImplBase() {
 
